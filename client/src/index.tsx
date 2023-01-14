@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import MainMenu from './components/MainMenu';
 import reportWebVitals from './reportWebVitals';
-import AuthPage from './components/AuthPage';
+import RootPage from './components/RootPage/RootPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <AuthPage />
-    <MainMenu test={'Hello'} />
+    <RootPage />
   </React.StrictMode>
 );
 

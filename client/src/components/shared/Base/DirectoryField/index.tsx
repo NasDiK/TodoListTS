@@ -1,22 +1,48 @@
-import React, {HTMLInputTypeAttribute} from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import cn from 'classnames';
+import s from './DirectoryField.module.scss';
 
-interface PropValidation {
-  //тип инпута
-  type: HTMLInputTypeAttribute,
-  //значение
-  value: HTMLInputTypeAttribute,
-  //Замещающий текст
-  placeholder: HTMLInputTypeAttribute
-};
+const DirectoryField = (props: any) => {
+  const {value: propValue, type, placeholder, className, fullWidth, onChange} = props;
+  console.log(props);
 
-const DirectoryField = (props: PropValidation) => {
-  const {value, type, placeholder} = props;
+  const [val, setVal] = useState(propValue || '');
+
   return(
     <input
       type={type}
-      value={value}
+      value={propValue}
       placeholder={placeholder}
+      className={cn(
+        {
+          [s.fullWidth]: fullWidth,
+          className: className
+        } 
+      )}
+      onChange={({target: {value}})=>onChange(value)}
     />)
 };
+
+DirectoryField.propTypes = {
+  //Тип филда
+  type: PropTypes.oneOf(['text']),
+  //Значение
+  value: PropTypes.string,
+  //Замещающий текст
+  placeholder: PropTypes.string,
+  //Кастомный стиль
+  className: PropTypes.string,
+  //На полную ширину родителя
+  fullWidth: PropTypes.bool,
+  //Событие при изменении
+  onChange: PropTypes.func
+};
+
+DirectoryField.defaultProps = {
+  placeholder: 'Введите значение',
+  fullWidth: false,
+  value: ''
+}
 
 export default DirectoryField;

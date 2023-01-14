@@ -1,3 +1,28 @@
-.maked {
-  background-color: red;
+.authWrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+
+  background: rgb(0, 255, 221);
+
+  .credentialFormWrapper {
+    background-color: white;
+    width: 250px;
+    border: 1px solid black;
+    margin: auto;
+
+    .header {
+      background: red;
+      color: white;
+      height: fit-content;
+      padding: 8px;
+      border-bottom: 1px solid black;
+    }
+
+    .content {
+      & > .field:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    };
+  }
 }
