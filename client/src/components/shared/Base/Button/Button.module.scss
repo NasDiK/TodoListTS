@@ -1,0 +1,11 @@
+.default {
+  background-color: wheat;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 24px;
+  transition: 0.2s all;
+}
+
+.default:hover {
+  background-color: #0010f5;
+}
