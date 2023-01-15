@@ -25,14 +25,18 @@ class TodoListStore {
   }
 
   private getNewId = () => {
-    let i: number = 0;
-    const existingNumbers = Object.keys(this.values);
-    while(true) {
-      if(existingNumbers.includes(String(i))) {
-        i++;
-      }
-      else {return i; }
-    }
+    // let i: number = 0;
+    // const existingNumbers = Object.keys(this.values);
+    // while(true) {
+    //   if(existingNumbers.includes(String(i))) {
+    //     i++;
+    //   }
+    //   else {return i; }
+    // }
+    const keyValues = Object.keys(this.values);
+
+    const maxInExisting = keyValues.length ? Math.max(...keyValues.map(id=>Number(id))) : 0;
+    return maxInExisting + 1;
   };
 };
 
