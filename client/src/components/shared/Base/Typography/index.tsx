@@ -4,7 +4,7 @@ import s from './Typography.module.scss';
 import cn from 'classnames';
 
 const Typography = (props: any) => {
-  const {variant, children, weight} = props;
+  const {variant, children, weight, className} = props;
 
   return (
     <span
@@ -18,6 +18,9 @@ const Typography = (props: any) => {
           {
             [s.body24]: variant === 'body24',
             [s.body16]: variant === 'body16'
+          },
+          {
+            [className]: !!className
           }
         )
       }
@@ -36,7 +39,8 @@ Typography.propTypes = {
     'body24',
     'body16'
   ]),
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string
 };
 
 Typography.defaultProps = {

@@ -1,0 +1,21 @@
+.todoWrapper {
+  text-align: center;
+  background: rgb(0, 229, 255);
+  border: 1px dashed black;
+
+  .title {
+  }
+
+  .TodoLine {
+    display: flex;
+  }
+}
+
+.todoChips {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 8px;
+  text-align: left;
+  background: orange;
+  width: 100%;
+}

@@ -1,8 +1,13 @@
 import React from 'react';
+import TodoList from './TodoList';
 
 
 const MainPage = (props: any) => {
-  return (<div>Hello world</div>)
+  return (
+    <div>
+      <TodoList />
+    </div>
+  )
 };
 
 export default MainPage

@@ -1,21 +1,17 @@
-import { inject, observer } from 'mobx-react';
+import {observer} from 'mobx-react';
 import React from 'react';
 import AuthPage from '../AuthPage';
 import MainPage from '../MainPage';
 
-const mapStore = inject('RootStore');
-
 const RootPageView = (props: any) => {
-  const {RootStore: {
-    isLogged
-  }} = props;
+  const {RootStore} = props;
 
 
-  if (!isLogged) {
-    return <AuthPage />
+  if (!RootStore.isLogged) {
+    return <AuthPage RootStore={RootStore} />
   }
 
   return <MainPage />
 };
 
-export default mapStore(observer(RootPageView));
+export default observer(RootPageView);

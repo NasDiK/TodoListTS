@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 class RootStore {
-  @observable isLogged:boolean = false;
+  @observable isLogged:boolean = true;
   
   constructor() {
     makeObservable(this);

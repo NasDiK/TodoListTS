@@ -5,7 +5,6 @@ import s from './DirectoryField.module.scss';
 
 const DirectoryField = (props: any) => {
   const {value: propValue, type, placeholder, className, fullWidth, onChange} = props;
-  console.log(props);
 
   const [val, setVal] = useState(propValue || '');
 
@@ -36,7 +35,7 @@ DirectoryField.propTypes = {
   //На полную ширину родителя
   fullWidth: PropTypes.bool,
   //Событие при изменении
-  onChange: PropTypes.func
+  onChange: PropTypes.func.isRequired
 };
 
 DirectoryField.defaultProps = {

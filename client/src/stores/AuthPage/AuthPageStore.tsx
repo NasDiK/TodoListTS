@@ -7,8 +7,12 @@ class AuthPageStore {
     'password': null
   };
 
-  constructor() {
+  public rootStore: any;
+
+  constructor(rootStore) {
     makeAutoObservable(this);
+
+    this.rootStore = rootStore;
 
     this.init();
   };
