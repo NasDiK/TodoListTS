@@ -5,41 +5,62 @@ import TodoChips from './commonComponents/TodoChips';
 import { observer } from 'mobx-react';
 import Button from '../../shared/Base/Button';
 import variables from '../../shared/styles/globals.module.scss';
+import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 
-const createNewTodo = (setFunc: Function) => {
+const createNewTodo = (createTodoByValue: Function) => {
   const value = prompt('Новое TODO');
 
   if(value) {
-    setFunc(null, value);
+    createTodoByValue({value});
   }
 };
 
-const renderTodo = ({values, setValue, deleteValue}) => {
-  console.log(values);
-  if(!Object.keys(values).length) {
+const renderTodo = ({values, setTodoValue, deleteTodo, onSortEnd}) => {
+  if(!values.length) {
     return (
       <div><Typography className={variables.red}>Нет тудушек</Typography></div>
     );
   }
 
-  return Object.keys(values).map((id: string) => {
-    return (
-      <div className={s.TodoLine}>
-        <TodoChips key={id} value={values[id]} setValue={(val)=>setValue(id,val)} />
-        <Button onClick={()=>deleteValue(id)}>Удалить</Button>
-      </div>
-    );
-  });
+  return (
+    <SortableList 
+      setTodoValue={setTodoValue}
+      values={values}
+      deleteTodo={deleteTodo}
+      axis={'y'}
+      onSortEnd={onSortEnd}
+      pressDelay={100}
+    />
+  );
+
 };
 
+const SortableList = SortableContainer<{setTodoValue: Function, values: Array<object>, deleteTodo: Function}>((props: any)=> {
+  const {values} = props;
+  return (<div>
+    {values.map((todo: any, index: React.Key | null | undefined)=><SortableItem key={index} todo={todo} index={index} {...props} />)}
+  </div>)
+})
+
+const SortableItem = SortableElement((props: any)=>{
+  const {todo, setTodoValue, deleteTodo} = props;
+  
+  return (
+    <div className={s.TodoLine}>
+      <TodoChips todo={todo} setTodoValue={(val: any)=>setTodoValue(todo.id, val)} />
+      <Button onClick={()=>deleteTodo(todo.id)}>Удалить</Button>
+    </div>
+  );
+})
+
 const TodoListView = (props: any) => {
-  const {TodoListStore: {values, setValue, deleteValue}} = props;
+  const {TodoListStore: {createTodo, sortedValues, deleteTodo, onSortEnd, setTodoValue}} = props;
 
   return (
     <div className={s.todoWrapper}>
       <Typography className={s.title} weight={'bold'}>{'TODO List'}</Typography>
-      {renderTodo({values, setValue, deleteValue})}
-      <Button onClick={()=>createNewTodo(setValue)}>{'Добавить новую тудушку'}</Button>
+      {renderTodo({values: sortedValues, setTodoValue, deleteTodo, onSortEnd})}
+      <Button onClick={()=>createNewTodo(createTodo)}>{'Добавить новую тудушку'}</Button>
     </div>
   );
 };

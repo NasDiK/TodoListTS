@@ -3,26 +3,27 @@ import s from '../../TodoList.module.scss';
 import PropTypes from 'prop-types';
 
 const TodoChips = (props: any) => {
-  const {value, setValue} = props;
+  const {todo, setTodoValue} = props;
 
-  const chipsOnClick = (oldValue) => {
+  const chipsOnClick = (event, oldValue) => {
     const newValue = prompt('Введите новый TODO', oldValue);
 
     if(newValue) {
-      setValue(newValue);
+      setTodoValue(newValue);
     }
   };
+  const {value} = todo;
 
   return (
-    <div className={s.todoChips} onClick={()=>chipsOnClick(value)}>
+    <div className={s.todoChips} onClick={(event)=>chipsOnClick(event, value)}>
       {value}
     </div>
   )
 };
 
 TodoChips.propTypes = {
-  value: PropTypes.string,
-  setValue: PropTypes.func.isRequired
+  todo: PropTypes.object,
+  setTodoValue: PropTypes.func.isRequired
 };
 
 export default TodoChips;
