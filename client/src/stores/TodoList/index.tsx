@@ -84,7 +84,12 @@ class TodoListStore {
     this.setTodoValues(toAdd);
   };
 
-  onSortEnd = (({oldIndex, newIndex}) => {
+  /**
+   * Меняем массив местами
+   * @param oldIndex Индекс с которого
+   * @param newIndex Индекс на который меняем
+   */
+  moveTodo = (oldIndex: number, newIndex: number) => {
     const oldTodo = toJS(this.sortedValues[oldIndex]);
     const newTodo = toJS(this.sortedValues[newIndex]);
 
@@ -92,7 +97,7 @@ class TodoListStore {
     this.setNewWeight(newTodo.id, oldTodo.weight);
 
     this.setTodoValues([...this.todoValues]);
-  });
+  };
 };
 
 export default TodoListStore;
